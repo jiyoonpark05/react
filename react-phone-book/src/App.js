@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import PhoneBookForm from "./components/PhoneBookForm";
+import NumberTable from "./components/NumberTable";
+import { useState } from "react";
 
-function App() {
+const App = (props) => {
+  const dataList = [];
+  const [userData, setUserData] = useState(dataList);
+
+  const addUserData = (data) => {
+    data.id = userData.length + 1;
+    setUserData([...userData, data]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main>
+        <PhoneBookForm addUserData={addUserData} />
+        <hr />
+        <NumberTable userData={userData} />
+      </main>
     </div>
   );
-}
+};
 
 export default App;
